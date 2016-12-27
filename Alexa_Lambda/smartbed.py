@@ -50,48 +50,29 @@ def handleDiscovery(context, event):
         return {"header": header,"payload": payload}
 
 def handleControl(context, event):
-    payload = ''
+    payload = { }
+	confirmStr = ''
     response = 0
     device_id = event['payload']['appliance']['applianceId']
     message_id = event['header']['messageId']
 
     if device_id != "SamrtBed":
         return
-    
+
     if event['header']['name'] == 'TurnOnRequest':
-        # Change topic, qos and payload
         response = client.publish(topic='raspberry/smartbed/myroom/status',qos=1, payload=json.dumps({"message":"on"}))
-        header = {
-        "namespace":"Alexa.ConnectedHome.Control",
-        "name":"TurnOnConfirmation",
-        "payloadVersion":"2",
-        "messageId": message_id
-        }
-        payload = { }
+		confirmStr = 'TurnOnConfirmation'
         
     if event['header']['name'] == 'TurnOffRequest':
-        # Change topic, qos and payload
         response = client.publish(topic='raspberry/smartbed/myroom/status',qos=1, payload=json.dumps({"message":"off"}))
-        header = {
-        "namespace":"Alexa.ConnectedHome.Control",
-        "name":"TurnOffConfirmation",
-        "payloadVersion":"2",
-        "messageId": message_id
-        }
-        payload = { }
+		confirmStr = 'TurnOffConfirmation'
         
     if event['header']['name'] == 'SetTargetTemperatureRequest':
         global prev_target
         
         target = event['payload']['targetTemperature']
         response = client.publish(topic='raspberry/smartbed/myroom/Ttarget',qos=1, payload=json.dumps({"message":"%s"%target}))
-        
-        header = {
-        "namespace":"Alexa.ConnectedHome.Control",
-        "name":"SetTargetTemperatureConfirmation",
-        "payloadVersion":"2",
-        "messageId": message_id
-        }
+        confirmStr = 'SetTargetTemperatureConfirmation'  
         payload = {
             "targetTemperature":{ "value":target },
             "temperatureMode":{   "value":"AUTO" },
@@ -101,5 +82,12 @@ def handleControl(context, event):
             }
         }
         prev_target = target
-    
+
+    header = {
+        "namespace":"Alexa.ConnectedHome.Control",
+        "name":confirmStr,
+        "payloadVersion":"2",
+        "messageId": message_id
+    }
+				
     return {"header": header,"payload": payload}
