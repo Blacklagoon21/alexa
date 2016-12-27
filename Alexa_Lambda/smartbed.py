@@ -41,7 +41,7 @@ def handleDiscovery(context, event):
                     "additionalApplianceDetails":{
                         "extraDetail1":"",
                         "extraDetail2":"",
-                        "extraDetail3":"",
+                        "extraDetail3":"", 
                         "extraDetail4":""
                     }
                 }
