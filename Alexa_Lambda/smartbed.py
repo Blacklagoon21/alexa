@@ -35,13 +35,14 @@ def handleDiscovery(context, event):
                     "isReachable":True,
                     "actions":[
                         "turnOn",
-                        "turnOff"
+                        "turnOff",
+						"setTargetTemperature"
                     ],
                     "additionalApplianceDetails":{
-                        "extraDetail1":"turn on the light",
-                        "extraDetail2":"turn off the light",
-                        "extraDetail3":"that's all",
-                        "extraDetail4":"done."
+                        "extraDetail1":"",
+                        "extraDetail2":"",
+                        "extraDetail3":"",
+                        "extraDetail4":""
                     }
                 }
             ]
