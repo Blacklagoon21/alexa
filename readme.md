@@ -10,4 +10,6 @@ smartbed  : Discovery and turn on/off, set temperature(not working yet)
 
 ## ESP-12 with NodeMCU
 
+if you need NodeMCU Firmware, please visit, https://nodemcu.readthedocs.io/en/dev/en/build/
+
 smartbed : It's for heater. Turn on/off, set max temperature(enable/disable this function), turn off timer(default 8 hours)
