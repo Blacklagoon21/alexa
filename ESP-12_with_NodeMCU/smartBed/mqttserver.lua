@@ -1,0 +1,3 @@
+mqttserver=""
+mqttid=""
+mqttpw=""
