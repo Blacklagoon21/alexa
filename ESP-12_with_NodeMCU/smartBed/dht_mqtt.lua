@@ -149,15 +149,3 @@ function send_temp()
 		mqtt:publish("env/heater/isrun","off",0,0, function(conn) end)
 	end
 end
-
---heater running sw
---gpio.mode(7,gpio.INT,gpio.FLOAT)
---gpio.trig(7, "down", function() -
---	if mqttIsRun == 1 then
---		if heaterIsRun == 1 then
-	--		heater("off")
---		else
---			heater("on")
---		end
---	end
---end)
